@@ -2,6 +2,7 @@ package main
 
 import (
 	"flag"
+	"fmt"
 	"log"
 
 	"github.com/BurntSushi/toml"
@@ -21,13 +22,19 @@ func main() {
 
 	config := apiserver.NewConfig()
 
+	fmt.Println("1")
+
 	_, err := toml.DecodeFile(configPath, config)
 	if err != nil {
 		log.Fatal("Decode error:   ", err)
 	}
 
+	fmt.Println("2")
+
 	s := apiserver.New(config)
 	if err := s.Start(); err != nil {
 		log.Fatal("Server start error: ", err)
 	}
+
+	fmt.Println("3")
 }
